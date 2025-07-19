@@ -1,0 +1,367 @@
+      subroutine userbc (i,j,k,f,eg)
+      include 'SIZE'
+      include 'TOTAL'
+      include 'NEKUSE'
+
+      common /meandudy/ dudy_mean
+      common /mygrad/  dudx(lx1,ly1,lz1,lelt)
+     &                , dudy(lx1,ly1,lz1,lelt)
+     &                , dudz(lx1,ly1,lz1,lelt)   
+
+      common /cvelbc/ uin(lx1,ly1,lz1,lelv)
+     $              , vin(lx1,ly1,lz1,lelv)
+     $              , win(lx1,ly1,lz1,lelv) 
+      
+      integer e
+      e=gllel(eg)
+
+
+      if (istep .ge. 20) then                !control after 2oth step
+       if (y .gt. -1.0 .and. y .lt. -0.99    !in three strip
+     $ .and.(( x .gt. 1.345 .and. x .lt. 1.645)
+     $ .or. ( x .gt. 2.99 .and. x .lt. 3.29)
+     $ .or. (x .gt. 4.635 .and. x .lt. 4.935))
+     $ .and. z .ge. 0.0 .and. z .le. 3.14) then 
+c       write(6,*) 'enters loop'  
+      if ((vin(i,j,k,e) .gt. 0.001 .and. dudy(i,j,k,e) .gt. 0.001)     !blow/suck loop
+     &  .or. (vin(i,j,k,e) .lt. 0.001 .and. dudy(i,j,k,e) .lt. 0.001))
+     &   then
+c      write(6,*) 'same sign'
+      ux=0
+      uy=-(dudy(i,j,k,e)-dudy_mean)*0.089
+c      uy=0
+      uz=0
+      else
+      write(6,*)'opposite'
+      ux=0
+      uy=(dudy(i,j,k,e)-dudy_mean)*0.34
+      uz=0
+      end if
+      
+c      write(6,*)'istep dudy dudy_mean ',istep,dudy, dudy_mean
+c      write(6,*)'istep uy', uy 
+      end if   
+      end if   
+      return
+      end
+
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    subroutine userbc (i,j,k,f,eg)
+      include 'SIZE'
+      include 'TOTAL'
+      include 'NEKUSE'
+
+      common /meandudy/ dudy_mean
+      common /mygrad/  dudx(lx1,ly1,lz1,lelt)
+     &                , dudy(lx1,ly1,lz1,lelt)
+     &                , dudz(lx1,ly1,lz1,lelt)   
+
+      common /cvelbc/ uin(lx1,ly1,lz1,lelv)
+     $              , vin(lx1,ly1,lz1,lelv)
+     $              , win(lx1,ly1,lz1,lelv) 
+      
+      integer e
+      e=gllel(eg)
+
+
+      if (istep .ge. 20) then                !control after 2oth step
+       if (y .gt. -1.0 .and. y .lt. -0.99    !in three strip
+     $ .and.(( x .gt. 1.345 .and. x .lt. 1.645)
+     $ .or. ( x .gt. 3.2 .and. x .lt. 3.29)
+     $ .or. (x .gt. 4.635 .and. x .lt. 4.935))
+     $ .and. z .ge. 0.0 .and. z .le. 3.14) then 
+       write(6,*) 'enters loop'  
+      if ((vin(i,j,k,e) .gt. 0.001 .and. dudy(i,j,k,e) .gt. 0.001)     !blow/suck loop
+     &  .or. (vin(i,j,k,e) .lt. 0.001 .and. dudy(i,j,k,e) .lt. 0.001))
+     &   then
+c      write(6,*) 'same sign'
+      ux=0
+      uy=-(dudy(i,j,k,e)-dudy_mean)*0.089
+c      uy=0
+      uz=0
+      else
+      write(6,*)'opposite'
+      ux=0
+      uy=(dudy(i,j,k,e)-dudy_mean)*0.34
+      uz=0
+      end if
+      
+c      write(6,*)'istep dudy dudy_mean ',istep,dudy, dudy_mean
+c      write(6,*)'istep uy', uy 
+      end if   
+      end if   
+      return
+      end
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+    subroutine userbc (i,j,k,f,eg)
+      include 'SIZE'
+      include 'TOTAL'
+      include 'NEKUSE'
+
+      common /meandudy/ dudy_mean
+      common /mygrad/  dudx(lx1,ly1,lz1,lelt)
+     &                , dudy(lx1,ly1,lz1,lelt)
+     &                , dudz(lx1,ly1,lz1,lelt)   
+
+      common /cvelbc/ uin(lx1,ly1,lz1,lelv)
+     $              , vin(lx1,ly1,lz1,lelv)
+     $              , win(lx1,ly1,lz1,lelv) 
+      
+      integer e
+      e=gllel(eg)
+
+
+      if (istep .ge. 20) then                !control after 2oth step
+       if (y .gt. -1.0 .and. y .lt. -0.99    !in three strip
+     $ .and.(( x .gt. 1.016 .and. x .lt. 1.316)
+     $ .or. ( x .gt. 2.332 .and. x .lt. 2.632)
+     $ .or. (x .gt. 3.648 .and. x .lt. 3.948)
+     $ .or. (x .gt. 4.964 .and. x .lt. 5.264))
+     $ .and. z .ge. 0.0 .and. z .le. 3.14) then 
+c       write(6,*) 'enters loop'  
+      if ((vin(i,j,k,e) .gt. 0.001 .and. dudy(i,j,k,e) .gt. 0.001)     !blow/suck loop
+     &  .or. (vin(i,j,k,e) .lt. 0.001 .and. dudy(i,j,k,e) .lt. 0.001))
+     &   then
+c      write(6,*) 'same sign'
+      ux=0
+      uy=-(dudy(i,j,k,e)-dudy_mean)*0.089
+c      uy=0
+      uz=0
+      else
+      write(6,*)'opposite'
+      ux=0
+      uy=(dudy(i,j,k,e)-dudy_mean)*0.34
+      uz=0
+      end if
+      
+c      write(6,*)'istep dudy dudy_mean ',istep,dudy, dudy_mean
+c      write(6,*)'istep uy', uy 
+      end if   
+      end if   
+      return
+      end
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------
+     subroutine userbc (i,j,k,f,eg)
+      include 'SIZE'
+      include 'TOTAL'
+      include 'NEKUSE'
+
+      common /meandudy/ dudy_mean
+      common /mygrad/  dudx(lx1,ly1,lz1,lelt)
+     &                , dudy(lx1,ly1,lz1,lelt)
+     &                , dudz(lx1,ly1,lz1,lelt)   
+
+      common /cvelbc/ uin(lx1,ly1,lz1,lelv)
+     $              , vin(lx1,ly1,lz1,lelv)
+     $              , win(lx1,ly1,lz1,lelv) 
+      
+      integer e
+      e=gllel(eg)
+
+
+      if (istep .ge. 20) then                !control after 2oth step
+       if (y .gt. -1.0 .and. y .lt. -0.99    !in three strip
+     $ .and.(( x .gt. 0.796 .and. x .lt. 1.096)
+     $ .or. ( x .gt. 1.892 .and. x .lt. 2.192)
+     $ .or. (x .gt. 2.988 .and. x .lt. 3.288)
+     $ .or. (x .gt. 4.084 .and. x .lt. 4.384)
+     $ .or. (x .gt. 5.1806 .and. x .lt. 5.480))
+     $ .and. z .ge. 0.0 .and. z .le. 3.14) then 
+c       write(6,*) 'enters loop'  
+      if ((vin(i,j,k,e) .gt. 0.001 .and. dudy(i,j,k,e) .gt. 0.001)     !blow/suck loop
+     &  .or. (vin(i,j,k,e) .lt. 0.001 .and. dudy(i,j,k,e) .lt. 0.001))
+     &   then
+c      write(6,*) 'same sign'
+      ux=0
+      uy=-(dudy(i,j,k,e)-dudy_mean)*0.089
+c      uy=0
+      uz=0
+      else
+      write(6,*)'opposite'
+      ux=0
+      uy=(dudy(i,j,k,e)-dudy_mean)*0.34
+      uz=0
+      end if
+      
+c      write(6,*)'istep dudy dudy_mean ',istep,dudy, dudy_mean
+c      write(6,*)'istep uy', uy 
+      end if   
+      end if   
+      return
+      end
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+     subroutine userbc (i,j,k,f,eg)
+      include 'SIZE'
+      include 'TOTAL'
+      include 'NEKUSE'
+
+      common /meandudy/ dudy_mean
+      common /mygrad/  dudx(lx1,ly1,lz1,lelt)
+     &                , dudy(lx1,ly1,lz1,lelt)
+     &                , dudz(lx1,ly1,lz1,lelt)   
+
+      common /cvelbc/ uin(lx1,ly1,lz1,lelv)
+     $              , vin(lx1,ly1,lz1,lelv)
+     $              , win(lx1,ly1,lz1,lelv) 
+      
+      integer e
+      e=gllel(eg)
+
+
+      if (istep .ge. 20) then                !control after 2oth step
+       if (y .gt. -1.0 .and. y .lt. -0.99    !in three strip
+     $ .and.(( x .gt. 0.796 .and. x .lt. 1.096)
+     $ .or. ( x .gt. 1.892 .and. x .lt. 2.192)
+     $ .or. (x .gt. 2.988 .and. x .lt. 3.288)
+     $ .or. (x .gt. 4.084 .and. x .lt. 4.384)
+     $ .or. (x .gt. 5.1806 .and. x .lt. 5.480))
+     $ .and. z .ge. 0.0 .and. z .le. 3.14) then 
+c       write(6,*) 'enters loop'  
+      if ((vin(i,j,k,e) .gt. 0.001 .and. dudy(i,j,k,e) .gt. 0.001)     !blow/suck loop
+     &  .or. (vin(i,j,k,e) .lt. 0.001 .and. dudy(i,j,k,e) .lt. 0.001))
+     &   then
+c      write(6,*) 'same sign'
+      ux=0
+      uy=-(dudy(i,j,k,e)-dudy_mean)*0.089
+c      uy=0
+      uz=0
+      else
+      write(6,*)'opposite'
+      ux=0
+      uy=(dudy(i,j,k,e)-dudy_mean)*0.34
+      uz=0
+      end if
+      
+c      write(6,*)'istep dudy dudy_mean ',istep,dudy, dudy_mean
+c      write(6,*)'istep uy', uy 
+      end if   
+      end if   
+      return
+      end
+
+
+------------------------------------------------------------------------------------------------------------------------
+   subroutine userbc (i,j,k,f,eg)
+      include 'SIZE'
+      include 'TOTAL'
+      include 'NEKUSE'
+
+      common /meandudy/ dudy_mean
+      common /mygrad/  dudx(lx1,ly1,lz1,lelt)
+     &                , dudy(lx1,ly1,lz1,lelt)
+     &                , dudz(lx1,ly1,lz1,lelt)   
+
+      common /cvelbc/ uin(lx1,ly1,lz1,lelv)
+     $              , vin(lx1,ly1,lz1,lelv)
+     $              , win(lx1,ly1,lz1,lelv) 
+      
+      integer e
+      e=gllel(eg)
+
+
+      if (istep .ge. 20) then                !control after 2oth step
+       if (y .gt. -1.0 .and. y .lt. -0.99    !in three strip
+     $ .and.(( x .gt. 0.5225 .and. x .lt. 0.8225)
+     $ .or. ( x .gt. 1.345 .and. x .lt. 1.645)
+     $ .or. (x .gt. 2.1675 .and. x .lt. 2.4675)
+     $ .or. (x .gt. 2.99 .and. x .lt. 3.29)
+     $ .or. (x .gt. 3.8125 .and. x .lt. 4.1125)
+     $ .or. (x .gt. 4.635 .and. x .lt. 4.935)
+     $ .or. (x .gt. 5.4575 .and. x .lt. 5.7575))
+     $ .and. z .ge. 0.0 .and. z .le. 3.14) then 
+c       write(6,*) 'enters loop'  
+      if ((vin(i,j,k,e) .gt. 0.001 .and. dudy(i,j,k,e) .gt. 0.001)     !blow/suck loop
+     &  .or. (vin(i,j,k,e) .lt. 0.001 .and. dudy(i,j,k,e) .lt. 0.001))
+     &   then
+c      write(6,*) 'same sign'
+      ux=0
+      uy=-(dudy(i,j,k,e)-dudy_mean)*0.089
+c      uy=0
+      uz=0
+      else
+      write(6,*)'opposite'
+      ux=0
+      uy=(dudy(i,j,k,e)-dudy_mean)*0.34
+      uz=0
+      end if
+      
+c      write(6,*)'istep dudy dudy_mean ',istep,dudy, dudy_mean
+c      write(6,*)'istep uy', uy 
+      end if   
+      end if   
+      return
+      end
+
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+     subroutine userbc (i,j,k,f,eg)
+      include 'SIZE'
+      include 'TOTAL'
+      include 'NEKUSE'
+
+      common /meandudy/ dudy_mean
+      common /mygrad/  dudx(lx1,ly1,lz1,lelt)
+     &                , dudy(lx1,ly1,lz1,lelt)
+     &                , dudz(lx1,ly1,lz1,lelt)   
+
+      common /cvelbc/ uin(lx1,ly1,lz1,lelv)
+     $              , vin(lx1,ly1,lz1,lelv)
+     $              , win(lx1,ly1,lz1,lelv) 
+      
+      integer e
+      e=gllel(eg)
+
+
+      if (istep .ge. 20) then                !control after 2oth step
+       if (y .gt. -1.0 .and. y .lt. -0.99    !in three strip
+     $ .and.(( x .gt. 0.43 .and. x .lt. 0.73)
+     $ .or. ( x .gt. 1.16 .and. x .lt. 1.46)
+     $ .or. (x .gt. 1.89 .and. x .lt. 2.19)
+     $ .or. (x .gt. 2.62 .and. x .lt. 2.92)
+     $ .or. (x .gt. 3.35 .and. x .lt. 3.65)
+     $ .or. (x .gt. 4.08 .and. x .lt. 4.38)
+     $ .or. (x .gt. 4.81 .and. x .lt. 5.11)
+     $ .or. (x .gt. 5.54 .and. x .lt. 5.84))
+     $ .and. z .ge. 0.0 .and. z .le. 3.14) then 
+c       write(6,*) 'enters loop'  
+      if ((vin(i,j,k,e) .gt. 0.001 .and. dudy(i,j,k,e) .gt. 0.001)     !blow/suck loop
+     &  .or. (vin(i,j,k,e) .lt. 0.001 .and. dudy(i,j,k,e) .lt. 0.001))
+     &   then
+c      write(6,*) 'same sign'
+      ux=0
+      uy=(dudy(i,j,k,e)-dudy_mean)*0.089
+c      uy=0
+      uz=0
+      else
+      write(6,*)'opposite'
+      ux=0
+      uy=0
+      uz=0
+      end if
+      
+c      write(6,*)'istep dudy dudy_mean ',istep,dudy, dudy_mean
+c      write(6,*)'istep uy', uy 
+      end if   
+      end if   
+      return
+      end
